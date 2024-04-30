@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.yanadoo.batch.mapper.yanadooMaster.JabMapper">
+    <select id="selectAdditionList" resultType="java.util.HashMap">
+        select
+            additionSeq
+            ,additionName
+            ,additionBrandCode
+            ,additionDeliveryCode
+            ,additionCategoryCode
+            ,additionType
+            ,logisticsCode
+            ,refundYn
+            ,basePrice
+            ,price
+            ,standardSalePrice
+            ,saleUsableStatus
+            ,saleQuantityLimitedYn
+            ,saleQuantity
+            ,taxType
+            ,useYn
+            ,publisher
+            ,isbnCode
+            ,additionImagePath
+            ,additionContent
+            ,versionCode
+        from yanadoo_master.dbo.ADDITION with(nolock)
+        where price >= #{price}
+        order by additionSeq desc
+    </select>
+    <update id="updateAddition" parameterType="map">
+        update  yanadoo_master.dbo.ADDITION
+        set price = #{price}
+        where
+            additionSeq = #{additionSeq}
+    </update>
+</mapper>
